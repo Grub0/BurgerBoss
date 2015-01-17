@@ -8,6 +8,7 @@ public class characterController : MonoBehaviour {
 	private float startingHeight;
 	private float attackTimer;
 	private bool right;
+	private bool hasWeapon;
 	//The time that needs to elapse for a new frame of the movement animation to show
 
 	#endregion
@@ -21,15 +22,32 @@ public class characterController : MonoBehaviour {
 	public Sprite right_closed_weapon;
 	public Sprite left_open_weapon;
 	public Sprite left_closed_weapon;
+
+	public Sprite right_open;
+	public Sprite right_closed;
+	public Sprite left_open;
+	public Sprite left_closed;
+
+	private Sprite right_sprite1;
+	private Sprite right_sprite2;
+	private Sprite left_sprite1;
+	private Sprite left_sprite2;
+
 	public Sprite left_attacking;
 	public Sprite right_attacking;
+
 	public float animationLag = .05f;
 	public float animationTimer;
 	#endregion
 
 	// Use this for initialization
-	void Start () {
-	
+	void Start () 
+	{
+		right_sprite1 = right_open;
+		right_sprite2 = right_closed;
+		left_sprite1 = left_open;
+		left_sprite2 = left_closed;
+		//gainWeapon();
 	}
 	
 	// Update is called once per frame
@@ -61,6 +79,30 @@ public class characterController : MonoBehaviour {
 				collision.gameObject.GetComponent<enemyController>().death();
 			}
 		}
+		if(collision.gameObject.tag == "weapon")
+		{
+			gainWeapon();
+			Destroy(collision.gameObject);
+			Debug.Log("Touching Weapon");
+		}
+	}
+	private void gainWeapon()
+	{
+		right_sprite1 = right_open_weapon;
+		right_sprite2 = right_closed_weapon;
+		left_sprite1 = left_open_weapon;
+		left_sprite2 = left_closed_weapon;
+		if((GetComponent<Image>().sprite == left_open|| GetComponent<Image>().sprite == left_closed))
+		{
+			GetComponent<Image>().sprite = left_sprite1;
+			animationTimer = 0;
+		}
+		else if((GetComponent<Image>().sprite == right_open|| GetComponent<Image>().sprite == right_closed))
+		{
+			GetComponent<Image>().sprite = right_sprite1;
+			animationTimer = 0;
+		}
+		hasWeapon = true;
 	}
 	private void move()
 	{
@@ -68,33 +110,31 @@ public class characterController : MonoBehaviour {
 		if(Input.GetKey("a"))
 		{
 			animationTimer += Time.deltaTime;
-			if((GetComponent<Image>().sprite == left_open_weapon|| GetComponent<Image>().sprite == right_open_weapon || GetComponent<Image>().sprite == right_closed_weapon) && animationTimer >= animationLag)
+			if((GetComponent<Image>().sprite == left_sprite1|| GetComponent<Image>().sprite == right_sprite1 || GetComponent<Image>().sprite == right_sprite2) && animationTimer >= animationLag)
 			{
-				GetComponent<Image>().sprite = left_closed_weapon;
+				GetComponent<Image>().sprite = left_sprite2;
 				animationTimer = 0;
 
 			}
-			else if(GetComponent<Image>().sprite == left_closed_weapon && animationTimer >= animationLag)
+			else if(GetComponent<Image>().sprite == left_sprite2 && animationTimer >= animationLag)
 			{
-				GetComponent<Image>().sprite = left_open_weapon;
+				GetComponent<Image>().sprite = left_sprite1;
 				animationTimer = 0;
-
-				
 			}
 			temp.x -= 5f;
 		}
 		if(Input.GetKey("d"))
 		{
 			animationTimer += Time.deltaTime;
-			if((GetComponent<Image>().sprite == right_open_weapon || GetComponent<Image>().sprite == left_open_weapon || GetComponent<Image>().sprite == left_closed_weapon) && animationTimer >= animationLag)
+			if((GetComponent<Image>().sprite == right_sprite1 || GetComponent<Image>().sprite == left_sprite1 || GetComponent<Image>().sprite == left_sprite2) && animationTimer >= animationLag)
 			{
-				GetComponent<Image>().sprite = right_closed_weapon;
+				GetComponent<Image>().sprite = right_sprite2;
 				animationTimer = 0;
 
 			}
-			else if(GetComponent<Image>().sprite == right_closed_weapon && animationTimer >= animationLag)
+			else if(GetComponent<Image>().sprite == right_sprite2 && animationTimer >= animationLag)
 			{
-				GetComponent<Image>().sprite = right_open_weapon;
+				GetComponent<Image>().sprite = right_sprite1;
 				animationTimer = 0;
 			}
 			temp.x += 5f;
@@ -104,7 +144,7 @@ public class characterController : MonoBehaviour {
 
 	private void attack()
 	{
-		if(Input.GetKeyDown("space") && attacking == false)
+		if(Input.GetKeyDown("space") && attacking == false && hasWeapon == true)
 		{
 			attacking = true;
 			if((this.GetComponent<Image>().sprite == right_open_weapon)||(this.GetComponent<Image>().sprite == right_closed_weapon))
