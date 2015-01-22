@@ -1,15 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using UnityEngine.UI;
 public class enemyController : MonoBehaviour {
 	#region Public Variables
 	public GameObject player;
 	public float speed;
 	public Vector3 size;
+	public int scorePoints;
+
 	#endregion
 
 	#region Private Variables
-	private float scorePoints;
 	#endregion
 	// Use this for initialization
 	void Start () 
@@ -33,7 +34,7 @@ public class enemyController : MonoBehaviour {
 		}
 	}
 
-		private void moveToPlayer()
+	private void moveToPlayer()
 	{
 		Vector2 temp = this.transform.position;
 		if(player.transform.position.x > this.transform.position.x)
@@ -52,6 +53,15 @@ public class enemyController : MonoBehaviour {
 	public void death()
 	{
 		//Do something with score
+		GameObject enemyDeath = (GameObject)Resources.Load("Prefabs/enemyDeath");
+		enemyDeath.transform.position = this.transform.position;
+		int score = player.GetComponent<characterController>().score;
+		score += scorePoints;
+		player.GetComponent<characterController>().score = score;
+		enemyDeath.GetComponent<textureAnimation>().setScore(scorePoints);
+		GameObject.FindGameObjectWithTag("score").GetComponent<Text>().text = string.Format("{0:n0}", score);
+		GameObject.Instantiate(enemyDeath);
+
 		Destroy(this.gameObject);
 	}
 }
