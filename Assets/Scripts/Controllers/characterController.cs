@@ -38,6 +38,8 @@ public class characterController : MonoBehaviour {
 
 	public float animationLag = .05f;
 	public float animationTimer;
+
+	public GameObject powerupAudio;
 	#endregion
 
 	// Use this for initialization
@@ -82,6 +84,7 @@ public class characterController : MonoBehaviour {
 		if(collision.gameObject.tag == "weapon")
 		{
 			gainWeapon();
+			collision.gameObject.GetComponent<AudioSource>().Play();
 			Destroy(collision.gameObject);
 			Debug.Log("Touching Weapon");
 		}
@@ -103,6 +106,7 @@ public class characterController : MonoBehaviour {
 			animationTimer = 0;
 		}
 		hasWeapon = true;
+		powerupAudio.GetComponent<AudioSource>().Play();
 	}
 	private void move()
 	{
