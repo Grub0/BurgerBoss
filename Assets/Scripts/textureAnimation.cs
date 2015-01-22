@@ -7,20 +7,22 @@ public class textureAnimation : MonoBehaviour {
 	public Sprite[] frames;
 	public int currentFrame;
 	public Text scoreText;
+	public GameObject player;
 	// Use this for initialization
 	void Start () 
 	{
 		this.transform.SetParent(GameObject.FindGameObjectWithTag("sceneControl").transform);
 		this.GetComponent<AudioSource>().Play();
-		//scoreText = gameObject.GetComponent("Text").GetComponent<Text>();
 	}
 
 	public void setScore(int sv)
 	{
-		//this.GetComponentInChildren<Text>().text;
-		//GetComponentInChildren<Text>().text = scoreValue.ToString();
+		int score = player.GetComponent<characterController>().score;
+		score += sv;
+		player.GetComponent<characterController>().score = score;
 		scoreText.text = string.Format("{0:n0}", sv);
-		//Debug.Log(GetComponentsInChildren<Text>().);
+		GameObject.FindGameObjectWithTag("score").GetComponent<Text>().text = string.Format("{0:n0}", score);
+
 	}
 	
 	// Update is called once per frame

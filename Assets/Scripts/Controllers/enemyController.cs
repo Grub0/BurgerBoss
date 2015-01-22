@@ -55,12 +55,11 @@ public class enemyController : MonoBehaviour {
 		//Do something with score
 		GameObject enemyDeath = (GameObject)Resources.Load("Prefabs/enemyDeath");
 		enemyDeath.transform.position = this.transform.position;
-		int score = player.GetComponent<characterController>().score;
-		score += scorePoints;
-		player.GetComponent<characterController>().score = score;
+		enemyDeath.GetComponent<textureAnimation>().player = GameObject.FindGameObjectWithTag("Player");
 		enemyDeath.GetComponent<textureAnimation>().setScore(scorePoints);
-		GameObject.FindGameObjectWithTag("score").GetComponent<Text>().text = string.Format("{0:n0}", score);
 		GameObject.Instantiate(enemyDeath);
+
+
 
 		Destroy(this.gameObject);
 	}

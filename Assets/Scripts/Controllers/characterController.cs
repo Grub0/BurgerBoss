@@ -90,6 +90,12 @@ public class characterController : MonoBehaviour {
 			Destroy(collision.gameObject);
 			//Debug.Log("Touching Weapon");
 		}
+
+		if(collision.gameObject.tag == "powerUp")
+		{
+			collision.gameObject.GetComponent<powerupController>().getGrabbed();
+			//Debug.Log("Touching Weapon");
+		}
 	}
 	private void gainWeapon()
 	{
