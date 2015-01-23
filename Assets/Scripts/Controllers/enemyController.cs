@@ -37,6 +37,11 @@ public class enemyController : MonoBehaviour {
 		{
 			death();
 		}
+
+		if(collision.gameObject.tag == "powerUp")
+		{
+			Physics.IgnoreCollision(collision.gameObject.collider, collider);
+		}
 	}
 
 	private void moveToPlayer()
@@ -75,14 +80,11 @@ public class enemyController : MonoBehaviour {
 	public void death()
 	{
 		//Do something with score
-		GameObject enemyDeath = (GameObject)Resources.Load("Prefabs/enemyDeath");
+		GameObject enemyDeath = (GameObject)Resources.Load("Prefabs/Deaths/enemyDeath");
 		enemyDeath.transform.position = this.transform.position;
 		enemyDeath.GetComponent<textureAnimation>().player = GameObject.FindGameObjectWithTag("Player");
 		enemyDeath.GetComponent<textureAnimation>().setScore(scorePoints);
 		GameObject.Instantiate(enemyDeath);
-
-
-
 		Destroy(this.gameObject);
 	}
 }

@@ -10,7 +10,7 @@ public class characterController : MonoBehaviour {
 	private bool right;
 	private bool hasWeapon;
 	//The time that needs to elapse for a new frame of the movement animation to show
-
+	private GameObject globalStorage;
 	#endregion
 
 	#region publicVariables
@@ -43,7 +43,16 @@ public class characterController : MonoBehaviour {
 
 	public int score;
 	#endregion
-
+	void Awake()
+	{
+		if(GameObject.FindGameObjectWithTag("globalStorage") == null)
+		{
+			Instantiate((GameObject)Resources.Load("Prefabs/globalStorage"));
+		}
+		globalStorage = GameObject.FindGameObjectWithTag("globalStorage");
+		score = globalStorage.GetComponent<globalStorage>().score;
+		setScore();
+	}
 	// Use this for initialization
 	void Start () 
 	{
@@ -61,10 +70,25 @@ public class characterController : MonoBehaviour {
 		jump ();
 		attack();
 	}
+
+	public void setScore()
+	{
+		GameObject.FindGameObjectWithTag("score").GetComponent<Text>().text = string.Format("{0:n0}", score);
+	}
+
 	private void death()
 	{
-		Application.LoadLevel(Application.loadedLevel);
-
+		globalStorage.GetComponent<globalStorage>().startingLives -=1;
+		if(globalStorage.GetComponent<globalStorage>().startingLives == 0)
+		{
+			globalStorage.GetComponent<globalStorage>().startingLives = 3;
+			Application.LoadLevel("mainMenu");
+		}
+		else if(globalStorage.GetComponent<globalStorage>().startingLives > 0)
+		{
+			globalStorage.GetComponent<globalStorage>().score = this.score;
+			Application.LoadLevel(Application.loadedLevel);
+		}
 	}
 	void OnCollisionEnter(Collision collision)
 	{

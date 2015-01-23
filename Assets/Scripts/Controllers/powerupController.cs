@@ -11,7 +11,7 @@ public class powerupController : MonoBehaviour {
 	public void getGrabbed()
 	{
 		//Do something with score
-		GameObject enemyDeath = (GameObject)Resources.Load("Prefabs/powerDeath");
+		GameObject enemyDeath = (GameObject)Resources.Load("Prefabs/Deaths/powerDeath");
 		enemyDeath.transform.position = this.transform.position;
 		enemyDeath.GetComponent<textureAnimation>().player = GameObject.FindGameObjectWithTag("Player");
 		enemyDeath.GetComponent<textureAnimation>().setScore(pointValue);
