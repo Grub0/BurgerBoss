@@ -8,6 +8,11 @@ public class enemyController : MonoBehaviour {
 	public Vector3 size;
 	public int scorePoints;
 
+	//Sprites
+	public Sprite frame1;
+	public Sprite frame2;
+	public float frameTimer;
+	public float timeTIlChange = .2f;
 	#endregion
 
 	#region Private Variables
@@ -48,8 +53,25 @@ public class enemyController : MonoBehaviour {
 			this.transform.localScale = new Vector3(-size.x,size.y,size.z);
 		}
 		this.transform.position = temp;
+		frameTimer+= Time.deltaTime;
+		if(frameTimer > timeTIlChange)
+		{
+			animate();
+			frameTimer = 0;
+		}
 	}
 
+	private void animate()
+	{
+		if(this.GetComponent<Image>().sprite == frame1)
+		{
+			this.GetComponent<Image>().sprite = frame2;
+		}
+		else
+		{
+			this.GetComponent<Image>().sprite = frame1;
+		}
+	}
 	public void death()
 	{
 		//Do something with score

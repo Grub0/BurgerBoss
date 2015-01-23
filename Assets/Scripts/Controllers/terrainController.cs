@@ -24,5 +24,17 @@ public class terrainController : MonoBehaviour {
 				Destroy(g);
 			}
 		}
+
+		terrains = GameObject.FindGameObjectsWithTag("powerUp");
+		foreach(GameObject g in terrains)
+		{
+			Vector3 temp = g.transform.position;
+			temp.x += horizontalMovementSpeed;
+			g.transform.position = temp;
+			if(g.transform.position.x < 0 - Screen.width/2)
+			{
+				Destroy(g);
+			}
+		}
 	}
 }
