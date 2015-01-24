@@ -22,7 +22,6 @@ public class textureAnimation : MonoBehaviour {
 		player.GetComponent<characterController>().score = score;
 		scoreText.text = string.Format("{0:n0}", sv);
 		GameObject.FindGameObjectWithTag("score").GetComponent<Text>().text = string.Format("{0:n0}", score);
-
 	}
 	
 	// Update is called once per frame

@@ -5,7 +5,6 @@ public class enemyController : MonoBehaviour {
 	#region Public Variables
 	public GameObject player;
 	public float speed;
-	public Vector3 size;
 	public int scorePoints;
 
 	//Sprites
@@ -16,6 +15,8 @@ public class enemyController : MonoBehaviour {
 	#endregion
 
 	#region Private Variables
+	private Vector3 size;
+
 	#endregion
 	// Use this for initialization
 	void Start () 
@@ -24,6 +25,7 @@ public class enemyController : MonoBehaviour {
 		{
 			player = GameObject.FindGameObjectWithTag("Player");
 		}
+		size = this.transform.localScale;
 	}
 	
 	// Update is called once per frame
@@ -38,7 +40,7 @@ public class enemyController : MonoBehaviour {
 			death();
 		}
 
-		if(collision.gameObject.tag == "powerUp")
+		if(collision.gameObject.tag == "powerUp" || collision.gameObject.tag == "weapon" || collision.gameObject.tag == "enemy")
 		{
 			Physics.IgnoreCollision(collision.gameObject.collider, collider);
 		}

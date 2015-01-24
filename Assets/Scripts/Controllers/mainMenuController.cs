@@ -5,9 +5,14 @@ public class mainMenuController : MonoBehaviour {
 
 	public GameObject insertCoin;
 	private float coinTimer;
+	public int highScore = 1000;
 	// Use this for initialization
 	void Start () 
 	{
+		if(GameObject.FindGameObjectWithTag("globalStorage") != null && GameObject.FindGameObjectWithTag("globalStorage").GetComponent<globalStorage>().score > highScore)
+		{
+			score = GameObject.FindGameObjectWithTag("globalStorage").GetComponent<globalStorage>().score;
+		}
 		setScore();
 	}
 
@@ -35,7 +40,7 @@ public class mainMenuController : MonoBehaviour {
 	}
 
 	public GameObject scoreText;
-	public int score = 100000;
+	public int score = 1000;
 	public void setScore()
 	{
 		scoreText.GetComponent<Text>().text = "HIGH SCORE " + string.Format("{0:n0}", score);
@@ -46,6 +51,10 @@ public class mainMenuController : MonoBehaviour {
 		coinFading();
 		if(Input.GetKeyDown("space"))
 		{
+			if(GameObject.FindGameObjectWithTag("globalStorage") != null)
+			{
+				GameObject.FindGameObjectWithTag("globalStorage").GetComponent<globalStorage>().score = 0;
+			}
 			Application.LoadLevel(Resources.Load("Scenes/mainScene").name);
 		}
 	}

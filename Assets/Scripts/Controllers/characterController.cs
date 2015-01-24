@@ -45,6 +45,8 @@ public class characterController : MonoBehaviour {
 	#endregion
 	void Awake()
 	{
+		powerupAudio = GameObject.FindGameObjectWithTag("pupAudio");
+
 		if(GameObject.FindGameObjectWithTag("globalStorage") == null)
 		{
 			Instantiate((GameObject)Resources.Load("Prefabs/globalStorage"));
