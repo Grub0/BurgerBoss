@@ -49,13 +49,13 @@ public class mainMenuController : MonoBehaviour {
 	void Update () 
 	{
 		coinFading();
-		if(Input.GetKeyDown("space"))
+		if(Input.GetKeyDown(KeyCode.Space) == true)
 		{
 			if(GameObject.FindGameObjectWithTag("globalStorage") != null)
 			{
 				GameObject.FindGameObjectWithTag("globalStorage").GetComponent<globalStorage>().score = 0;
 			}
-			Application.LoadLevel(Resources.Load("Scenes/mainScene").name);
+			Application.LoadLevel("mainScene");
 		}
 	}
 }
