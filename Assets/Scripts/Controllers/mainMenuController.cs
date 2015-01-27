@@ -55,7 +55,7 @@ public class mainMenuController : MonoBehaviour {
 			{
 				GameObject.FindGameObjectWithTag("globalStorage").GetComponent<globalStorage>().score = 0;
 			}
-			Application.LoadLevel("mainScene");
+			Application.LoadLevel("inBetweenLives");
 		}
 	}
 }

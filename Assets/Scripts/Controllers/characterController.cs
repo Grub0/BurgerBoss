@@ -81,15 +81,15 @@ public class characterController : MonoBehaviour {
 	private void death()
 	{
 		globalStorage.GetComponent<globalStorage>().startingLives -=1;
-		if(globalStorage.GetComponent<globalStorage>().startingLives == 0)
+		if(globalStorage.GetComponent<globalStorage>().startingLives == -1)
 		{
 			globalStorage.GetComponent<globalStorage>().startingLives = 3;
 			Application.LoadLevel("mainMenu");
 		}
-		else if(globalStorage.GetComponent<globalStorage>().startingLives > 0)
+		else if(globalStorage.GetComponent<globalStorage>().startingLives > -1)
 		{
 			globalStorage.GetComponent<globalStorage>().score = this.score;
-			Application.LoadLevel(Application.loadedLevel);
+			Application.LoadLevel("inBetweenLives");
 		}
 	}
 	void OnCollisionEnter(Collision collision)
