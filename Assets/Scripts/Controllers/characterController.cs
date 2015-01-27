@@ -39,8 +39,8 @@ public class characterController : MonoBehaviour {
 	public float animationLag = .05f;
 	public float animationTimer;
 
+	//Audio Source Objects
 	public GameObject powerupAudio;
-
 	public int score;
 	#endregion
 	void Awake()

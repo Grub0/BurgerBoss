@@ -12,6 +12,7 @@ public class enemyController : MonoBehaviour {
 	public Sprite frame2;
 	public float frameTimer;
 	public float timeTIlChange = .2f;
+	public float distanceBeforeAwareness = 500f;
 	#endregion
 
 	#region Private Variables
@@ -49,12 +50,12 @@ public class enemyController : MonoBehaviour {
 	private void moveToPlayer()
 	{
 		Vector2 temp = this.transform.position;
-		if(player.transform.position.x > this.transform.position.x)
+		if(player.transform.position.x > this.transform.position.x && player.transform.position.x < this.transform.position.x + distanceBeforeAwareness)
 		{
 			temp.x += speed;
 			this.transform.localScale = new Vector3(size.x,size.y,size.z);
 		}
-		else if(player.transform.position.x < this.transform.position.x)
+		else if(player.transform.position.x < this.transform.position.x && player.transform.position.x > this.transform.position.x - distanceBeforeAwareness)
 		{
 			temp.x -= speed;
 			this.transform.localScale = new Vector3(-size.x,size.y,size.z);
