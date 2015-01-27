@@ -11,6 +11,7 @@ public class characterController : MonoBehaviour {
 	private bool hasWeapon;
 	//The time that needs to elapse for a new frame of the movement animation to show
 	private GameObject globalStorage;
+	private GameObject gameOver;
 	#endregion
 
 	#region publicVariables
@@ -46,7 +47,7 @@ public class characterController : MonoBehaviour {
 	void Awake()
 	{
 		powerupAudio = GameObject.FindGameObjectWithTag("pupAudio");
-
+		gameOver = GameObject.FindGameObjectWithTag("gameOver");
 		if(GameObject.FindGameObjectWithTag("globalStorage") == null)
 		{
 			Instantiate((GameObject)Resources.Load("Prefabs/globalStorage"));
@@ -68,9 +69,16 @@ public class characterController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
+		if(gameOver.GetComponent<gameOverController>().activated == false)
+		{
 		move();
 		jump ();
 		attack();
+		}
+		else
+		{
+			Destroy(rigidbody);
+		}
 	}
 
 	public void setScore()
@@ -83,13 +91,18 @@ public class characterController : MonoBehaviour {
 		globalStorage.GetComponent<globalStorage>().startingLives -=1;
 		if(globalStorage.GetComponent<globalStorage>().startingLives == -1)
 		{
-			globalStorage.GetComponent<globalStorage>().startingLives = 3;
-			Application.LoadLevel("mainMenu");
+			GameObject death = (GameObject)Resources.Load("Prefabs/Deaths/playerDeath");
+			death.transform.position = this.transform.position;
+			GameObject.Instantiate(death);
+			Destroy(gameObject);
 		}
 		else if(globalStorage.GetComponent<globalStorage>().startingLives > -1)
 		{
 			globalStorage.GetComponent<globalStorage>().score = this.score;
-			Application.LoadLevel("inBetweenLives");
+			GameObject death = (GameObject)Resources.Load("Prefabs/Deaths/playerDeath");
+			death.transform.position = this.transform.position;
+			GameObject.Instantiate(death);
+			Destroy(gameObject);
 		}
 	}
 	void OnCollisionEnter(Collision collision)

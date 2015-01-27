@@ -32,7 +32,10 @@ public class enemyController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
+		if(GameObject.FindGameObjectWithTag("Player") != null)
+		{
 		moveToPlayer();
+		}
 	}
 	void OnCollisionEnter(Collision collision)
 	{

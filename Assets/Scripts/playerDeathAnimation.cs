@@ -1,12 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
-public class textureAnimation : MonoBehaviour {
+public class playerDeathAnimation : MonoBehaviour {
 	public float timeBetweenFrames;
 	private float timer;
 	public Sprite[] frames;
 	public int currentFrame;
-	public Text scoreText;
 	public GameObject player;
 	public bool looping;
 	public bool destroyOnEnd;
@@ -15,17 +14,9 @@ public class textureAnimation : MonoBehaviour {
 	{
 		this.transform.SetParent(GameObject.FindGameObjectWithTag("sceneControl").transform);
 		this.GetComponent<AudioSource>().Play();
+		//GameObject.FindGameObjectWithTag("gameOver").GetComponent<gameOverController>().activated = true;
 	}
 
-	public void setScore(int sv)
-	{
-		int score = player.GetComponent<characterController>().score;
-		score += sv;
-		player.GetComponent<characterController>().score = score;
-		scoreText.text = string.Format("{0:n0}", sv);
-		GameObject.FindGameObjectWithTag("score").GetComponent<Text>().text = string.Format("{0:n0}", score);
-	}
-	
 	// Update is called once per frame
 	void Update () 
 	{
@@ -42,9 +33,14 @@ public class textureAnimation : MonoBehaviour {
 			this.GetComponent<Image>().sprite = frames[currentFrame];
 			timer = 0;
 		}
-		else if(currentFrame+1 >= frames.Length && looping == false && destroyOnEnd == true) 
+		else if(currentFrame+1 >= frames.Length && looping == false && GameObject.FindGameObjectWithTag("globalStorage").GetComponent<globalStorage>().startingLives == -1) 
 		{
-			Destroy(gameObject);
+			GameObject.FindGameObjectWithTag("gameOver").GetComponent<gameOverController>().activated = true;
 		}
+		else if(currentFrame+1 >= frames.Length && looping == false && GameObject.FindGameObjectWithTag("globalStorage").GetComponent<globalStorage>().startingLives > -1 && GameObject.FindGameObjectWithTag("gameOver").GetComponent<gameOverController>().activated == false) 
+		{
+			Application.LoadLevel("inBetweenLives");
+		}
+
 	}
 }
