@@ -135,6 +135,12 @@ public class characterController : MonoBehaviour {
 			collision.gameObject.GetComponent<powerupController>().getGrabbed();
 			//Debug.Log("Touching Weapon");
 		}
+
+		if(collision.gameObject.tag == "goldenBurger")
+		{
+			//Victory condition will go here
+			Debug.Log("Touching victory");
+		}
 	}
 	private void gainWeapon()
 	{
@@ -202,11 +208,15 @@ public class characterController : MonoBehaviour {
 			{
 				this.GetComponent<Image>().sprite = right_attacking;
 				this.transform.localScale = new Vector2(1.2f,1f);
+				this.GetComponent<BoxCollider>().size = new Vector2(120f,100f);
+
+				
 			}
 			else if((this.GetComponent<Image>().sprite == left_open_weapon)||this.GetComponent<Image>().sprite == left_closed_weapon)
 			{
 				this.GetComponent<Image>().sprite = left_attacking;
 				this.transform.localScale = new Vector2(1.2f,1f);
+				this.GetComponent<BoxCollider>().size = new Vector2(120f,100f);
 
 			}
 		}
@@ -225,14 +235,19 @@ public class characterController : MonoBehaviour {
 			if(this.GetComponent<Image>().sprite == left_attacking)
 			{
 				this.transform.localScale = new Vector2(1f,1f);
-
 				this.GetComponent<Image>().sprite = left_closed_weapon;
+				this.GetComponent<BoxCollider>().size = new Vector2(60f,100f);
+
+				
 			}
 			else if(this.GetComponent<Image>().sprite == right_attacking)
 			{
 				this.transform.localScale = new Vector2(1f,1f);
 
 				this.GetComponent<Image>().sprite = right_closed_weapon;
+				this.GetComponent<BoxCollider>().size = new Vector2(60f,100f);
+
+				
 			}
 		}
 	}
