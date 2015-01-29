@@ -88,6 +88,7 @@ public class characterController : MonoBehaviour {
 
 	private void death()
 	{
+		globalStorage.GetComponent<globalStorage>().score = score;
 		globalStorage.GetComponent<globalStorage>().startingLives -=1;
 		if(globalStorage.GetComponent<globalStorage>().startingLives == -1)
 		{
@@ -134,12 +135,6 @@ public class characterController : MonoBehaviour {
 		{
 			collision.gameObject.GetComponent<powerupController>().getGrabbed();
 			//Debug.Log("Touching Weapon");
-		}
-
-		if(collision.gameObject.tag == "goldenBurger")
-		{
-			//Victory condition will go here
-			Debug.Log("Touching victory");
 		}
 	}
 	private void gainWeapon()

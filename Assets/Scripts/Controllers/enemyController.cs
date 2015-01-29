@@ -44,7 +44,7 @@ public class enemyController : MonoBehaviour {
 			death();
 		}
 
-		if(collision.gameObject.tag == "powerUp" || collision.gameObject.tag == "weapon" || collision.gameObject.tag == "enemy")
+		if(collision.gameObject.tag == "powerUp" || collision.gameObject.tag == "weapon")
 		{
 			Physics.IgnoreCollision(collision.gameObject.collider, collider);
 		}

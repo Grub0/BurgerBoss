@@ -23,7 +23,9 @@ public class gameOverController : MonoBehaviour {
 		if(timer >lagBetweenLetters*11)
 		{
 			GameObject.FindGameObjectWithTag("globalStorage").GetComponent<globalStorage>().startingLives = 3;
-			Application.LoadLevel("mainMenu");
+			//Application.LoadLevel("mainMenu");
+			Application.LoadLevel("victory");
+
 		}
 		else if(timer >lagBetweenLetters*8)
 		{

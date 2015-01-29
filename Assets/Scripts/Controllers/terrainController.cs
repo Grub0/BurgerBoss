@@ -56,5 +56,13 @@ public class terrainController : MonoBehaviour {
 			temp.x += horizontalMovementSpeed;
 			g.transform.position = temp;
 		}
+
+		terrains = GameObject.FindGameObjectsWithTag("enemy");
+		foreach(GameObject g in terrains)
+		{
+			Vector3 temp = g.transform.position;
+			temp.x += horizontalMovementSpeed;
+			g.transform.position = temp;
+		}
 	}
 }
