@@ -48,10 +48,6 @@ public class characterController : MonoBehaviour {
 	{
 		powerupAudio = GameObject.FindGameObjectWithTag("pupAudio");
 		gameOver = GameObject.FindGameObjectWithTag("gameOver");
-		if(GameObject.FindGameObjectWithTag("globalStorage") == null)
-		{
-			Instantiate((GameObject)Resources.Load("Prefabs/globalStorage"));
-		}
 		globalStorage = GameObject.FindGameObjectWithTag("globalStorage");
 		score = globalStorage.GetComponent<globalStorage>().score;
 		setScore();

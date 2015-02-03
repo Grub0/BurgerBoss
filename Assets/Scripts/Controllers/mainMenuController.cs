@@ -5,14 +5,11 @@ public class mainMenuController : MonoBehaviour {
 
 	public GameObject insertCoin;
 	private float coinTimer;
-	public int highScore = 1000;
+	private globalStorage gst;
 	// Use this for initialization
 	void Start () 
 	{
-		if(GameObject.FindGameObjectWithTag("globalStorage") != null && GameObject.FindGameObjectWithTag("globalStorage").GetComponent<globalStorage>().score > highScore)
-		{
-			score = GameObject.FindGameObjectWithTag("globalStorage").GetComponent<globalStorage>().score;
-		}
+		gst = GameObject.FindGameObjectWithTag("globalStorage").GetComponent<globalStorage>();
 		setScore();
 	}
 
@@ -40,10 +37,9 @@ public class mainMenuController : MonoBehaviour {
 	}
 
 	public GameObject scoreText;
-	public int score = 1000;
 	public void setScore()
 	{
-		scoreText.GetComponent<Text>().text = "HIGH SCORE " + string.Format("{0:n0}", score);
+		scoreText.GetComponent<Text>().text = "HIGH SCORE " + string.Format("{0:n0}", gst.currentHighScore);
 	}
 	// Update is called once per frame
 	void Update () 

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using UnityEngine.UI;
 public class splashController : MonoBehaviour {
 	public GameObject ship;
 	private float verticalShipMove = 2f;
@@ -10,10 +10,17 @@ public class splashController : MonoBehaviour {
 	public GameObject cloud2;
 	public GameObject cloud3;
 	public GameObject splashStart;
+	private globalStorage gst;
 	// Use this for initialization
 	void Start () 
 	{
 		splashStart.GetComponent<AudioSource>().Play();
+		gst = GameObject.FindGameObjectWithTag("globalStorage").GetComponent<globalStorage>();
+		if(gst.score > gst.currentHighScore)
+		{
+			GameObject.FindGameObjectWithTag("highScoreName").GetComponent<Text>().text = gst.highScoreText;
+			gst.currentHighScore = gst.score;
+		}
 	}
 	
 	// Update is called once per frame
