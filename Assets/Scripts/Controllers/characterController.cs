@@ -81,8 +81,12 @@ public class characterController : MonoBehaviour {
 	{
 		GameObject.FindGameObjectWithTag("score").GetComponent<Text>().text = string.Format("{0:n0}", score);
 	}
-
-	private void death()
+	public void getPrincess()
+	{
+		globalStorage.GetComponent<globalStorage>().score = this.score;
+		GameObject.FindGameObjectWithTag("gameOver").GetComponent<gameOverController>().activated = true;
+	}
+	public void death()
 	{
 		globalStorage.GetComponent<globalStorage>().score = score;
 		globalStorage.GetComponent<globalStorage>().startingLives -=1;

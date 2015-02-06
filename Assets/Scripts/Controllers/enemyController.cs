@@ -34,7 +34,8 @@ public class enemyController : MonoBehaviour {
 	{
 		if(GameObject.FindGameObjectWithTag("Player") != null)
 		{
-		moveToPlayer();
+			this.rigidbody.useGravity = true;
+			moveToPlayer();
 		}
 	}
 	void OnCollisionEnter(Collision collision)
