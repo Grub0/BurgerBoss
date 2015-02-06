@@ -92,7 +92,15 @@ public class characterController : MonoBehaviour {
 		globalStorage.GetComponent<globalStorage>().startingLives -=1;
 		if(globalStorage.GetComponent<globalStorage>().startingLives == -1)
 		{
-			GameObject death = (GameObject)Resources.Load("Prefabs/Deaths/playerDeath");
+			GameObject death;
+			if(hasWeapon == true)
+			{
+				death = (GameObject)Resources.Load("Prefabs/Deaths/playerDeath");
+			}
+			else
+			{
+				death = (GameObject)Resources.Load("Prefabs/Deaths/playerDeath_noWeapon");
+			}
 			death.transform.position = this.transform.position;
 			GameObject.Instantiate(death);
 			Destroy(gameObject);
@@ -100,7 +108,15 @@ public class characterController : MonoBehaviour {
 		else if(globalStorage.GetComponent<globalStorage>().startingLives > -1)
 		{
 			globalStorage.GetComponent<globalStorage>().score = this.score;
-			GameObject death = (GameObject)Resources.Load("Prefabs/Deaths/playerDeath");
+			GameObject death;
+			if(hasWeapon == true)
+			{
+				death = (GameObject)Resources.Load("Prefabs/Deaths/playerDeath");
+			}
+			else
+			{
+				death = (GameObject)Resources.Load("Prefabs/Deaths/playerDeath_noWeapon");
+			}
 			death.transform.position = this.transform.position;
 			GameObject.Instantiate(death);
 			Destroy(gameObject);
