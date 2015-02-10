@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+
 public class mainMenuController : MonoBehaviour {
 
 	public GameObject insertCoin;
@@ -9,6 +10,10 @@ public class mainMenuController : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
 	{
+		if(GameObject.FindGameObjectWithTag("globalStorage") == null)
+		{
+			Instantiate(Resources.Load("Prefabs/globalStorage"));
+		}
 		gst = GameObject.FindGameObjectWithTag("globalStorage").GetComponent<globalStorage>();
 		setScore();
 	}

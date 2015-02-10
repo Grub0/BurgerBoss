@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+
 public class playerDeathAnimation : MonoBehaviour {
 	public float timeBetweenFrames;
 	private float timer;

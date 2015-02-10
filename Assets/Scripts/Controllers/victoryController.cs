@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+
 public class victoryController : MonoBehaviour {
 	private globalStorage gst;
 	// Use this for initialization

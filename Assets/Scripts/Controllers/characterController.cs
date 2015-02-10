@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI; 
+
 public class characterController : MonoBehaviour {
 	#region privateVariables
 	private bool jumping;
@@ -47,7 +48,11 @@ public class characterController : MonoBehaviour {
 	void Awake()
 	{
 		powerupAudio = GameObject.FindGameObjectWithTag("pupAudio");
-		gameOver = GameObject.FindGameObjectWithTag("gameOver");
+		gameOver = GameObject.FindGameObjectWithTag("gameOver");		
+		if(GameObject.FindGameObjectWithTag("globalStorage") == null)
+		{
+			Instantiate(Resources.Load("Prefabs/globalStorage"));
+		}
 		globalStorage = GameObject.FindGameObjectWithTag("globalStorage");
 		score = globalStorage.GetComponent<globalStorage>().score;
 		setScore();
@@ -84,7 +89,6 @@ public class characterController : MonoBehaviour {
 	public void getPrincess()
 	{
 		globalStorage.GetComponent<globalStorage>().score = this.score;
-		GameObject.FindGameObjectWithTag("gameOver").GetComponent<gameOverController>().activated = true;
 	}
 	public void death()
 	{

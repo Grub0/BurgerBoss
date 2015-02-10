@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+
 public class gameOverController : MonoBehaviour {
 	public float timer;
 	public float lagBetweenLetters = .1f;

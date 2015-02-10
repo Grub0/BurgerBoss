@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+
 public class enemyController : MonoBehaviour {
 	#region Public Variables
 	public GameObject player;

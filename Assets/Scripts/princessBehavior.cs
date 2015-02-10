@@ -1,12 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+
 public class princessBehavior : MonoBehaviour {
-	public Sprite[] frames = new Sprite[3];
+	public Sprite[] frames = new Sprite[4];
 	private float timer;
-	private float timeBetweenFrames = 1f;
+	private float timeBetweenFrames = .3f;
 	private int currentFrame = 0;
-	private bool active;
+	private bool princessActive;
 	// Use this for initialization
 	void Start () 
 	{
@@ -17,7 +18,7 @@ public class princessBehavior : MonoBehaviour {
 	{
 		if(collision.gameObject.tag == "Player")
 		{
-			active = true;
+			princessActive = true;
 			this.GetComponent<AudioSource>().Play();
 			GameObject.Find("Stage Music").GetComponent<AudioSource>().Stop();
 		}
@@ -26,14 +27,14 @@ public class princessBehavior : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-		if(active == true)
+		if(princessActive == true)
 		{
 		timer+= Time.deltaTime;
 		if(timer>timeBetweenFrames)
 		{
 			timer = 0;
 			currentFrame+=1;
-			if(currentFrame<frames.Length -1)
+			if(currentFrame<frames.Length)
 			{
 				this.GetComponent<Image>().sprite = frames[currentFrame];
 			}
@@ -41,6 +42,8 @@ public class princessBehavior : MonoBehaviour {
 			{
 				GameObject.FindGameObjectWithTag("globalStorage").GetComponent<globalStorage>().gotPrincess = true;
 				GameObject.FindGameObjectWithTag("Player").GetComponent<characterController>().getPrincess();
+				GameObject.FindGameObjectWithTag("gameOver").GetComponent<gameOverController>().activated = true;
+
 			}
 		}
 		}

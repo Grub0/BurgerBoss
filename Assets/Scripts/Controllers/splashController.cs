@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+
 public class splashController : MonoBehaviour {
 	public GameObject ship;
 	private float verticalShipMove = 2f;

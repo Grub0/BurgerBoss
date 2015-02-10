@@ -8,6 +8,10 @@ public class levelController : MonoBehaviour {
 	{
 		Physics.gravity = new Vector3(0, gravityAmount, 0);
 		GameObject oneUP = GameObject.FindGameObjectWithTag("livesText");
+		if(GameObject.FindGameObjectWithTag("globalStorage") == null)
+		{
+			Instantiate(Resources.Load("Prefabs/globalStorage"));
+		}
 		GameObject globalVar = GameObject.FindGameObjectWithTag("globalStorage");
 		for(int i=1;i<globalVar.GetComponent<globalStorage>().startingLives + 1;i++)
 		{

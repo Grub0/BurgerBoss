@@ -3,9 +3,9 @@ using System.Collections;
 
 public class globalStorage : MonoBehaviour {
 	public int startingLives = 3;
-	public int score;
-	public string highScoreText;
-	public int currentHighScore = 300;
+	public int score = 0;
+	public string highScoreText = "BOBSUX";
+	public int currentHighScore = 317000;
 	public bool gotPrincess;
 	// Use this for initialization
 	void Start () 

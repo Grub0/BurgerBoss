@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+
 public class enterHSController : MonoBehaviour {
 	private globalStorage gst;
 	private Text hsName;
